@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>VETRO — Tecnología de Lujo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#0d0705;color:#E7C196;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;overflow-x:hidden}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(-10px)}50%{transform:translateY(10px)}}
+@keyframes pulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.3)}}
+@keyframes particle{0%{opacity:0;transform:translateY(0) scale(0)}40%{opacity:.7}100%{opacity:0;transform:translateY(-60px) scale(0)}}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;transition:background .5s,backdrop-filter .5s;border-bottom:1px solid transparent}
+#nav.scrolled{background:rgba(13,7,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(197,121,56,.12)}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;letter-spacing:.14em;background:linear-gradient(135deg,#E7C196,#C57938,#6D3C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(231,193,150,.6);text-decoration:none}
+@media(max-width:520px){.nav-links{display:none}}
+.nav-cta{padding:8px 18px;border-radius:50px;background:linear-gradient(135deg,#6D3C1C,#C57938);color:#1a0e08;font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(160deg,#0d0705 0%,#1c0f08 45%,#261509 70%,#160c06 100%);padding:80px 20px 60px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(197,121,56,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(197,121,56,.04) 1px,transparent 1px);background-size:68px 68px;pointer-events:none}
+.hero-orb1{position:absolute;width:560px;height:560px;top:0;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(109,60,28,.28) 0%,transparent 65%);filter:blur(55px);pointer-events:none}
+.hero-orb2{position:absolute;width:320px;height:320px;bottom:0;left:-5%;background:radial-gradient(circle,rgba(197,121,56,.1) 0%,transparent 65%);filter:blur(70px);pointer-events:none}
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.p{position:absolute;width:2px;height:2px;border-radius:50%;background:#C57938;box-shadow:0 0 6px #C57938;animation:particle linear infinite}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:600px;width:100%}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px;animation:fadeUp .8s .3s both}
+.eline{height:1px;width:36px;background:linear-gradient(90deg,transparent,#C57938)}
+.eline.r{background:linear-gradient(90deg,#C57938,transparent)}
+.etxt{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:#C57938}
+.h1a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(56px,16vw,110px);font-weight:700;line-height:.95;background:linear-gradient(135deg,#E7C196 0%,#C57938 40%,#6D3C1C 80%,#E7C196 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .9s .5s both}
+.h1b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(56px,16vw,110px);font-weight:300;font-style:italic;line-height:1.05;background:linear-gradient(135deg,#6D3C1C 0%,#C57938 50%,#E7C196 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .9s .65s both;margin-bottom:20px}
+.phone-wrap{display:flex;justify-content:center;margin:4px 0 20px;animation:fadeUp 1s .8s both}
+.phone-float{animation:float 5s ease-in-out infinite;position:relative}
+.phone-aura{position:absolute;inset:-30px;background:radial-gradient(circle,rgba(197,121,56,.28) 0%,transparent 65%);filter:blur(20px)}
+.hero-sub{font-family:Georgia,serif;font-style:italic;font-size:14px;line-height:1.9;color:rgba(231,193,150,.55);max-width:380px;margin:0 auto 28px;animation:fadeUp .8s 1s both}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;animation:fadeUp .8s 1.2s both}
+.btn-g{padding:14px 30px;border-radius:50px;background:linear-gradient(135deg,#6D3C1C,#C57938,#E7C196);color:#1a0e08;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;box-shadow:0 0 26px rgba(197,121,56,.4)}
+.btn-o{padding:14px 30px;border-radius:50px;background:transparent;color:#E7C196;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(197,121,56,.4);cursor:pointer}
+.stats{display:flex;justify-content:center;gap:28px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(197,121,56,.1);animation:fadeUp .8s 1.5s both}
+.sn{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;background:linear-gradient(135deg,#E7C196,#C57938);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.sl{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(231,193,150,.4);text-align:center;margin-top:3px}
+.scroll-ind{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;animation:fadeUp .8s 2s both}
+.scroll-ind span{font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:rgba(197,121,56,.4)}
+.scroll-bar{width:1px;height:28px;background:linear-gradient(180deg,#C57938,transparent);animation:pulse 1.5s ease-in-out infinite}
+
+/* PRODUCTS */
+#products{padding:80px 16px;background:linear-gradient(180deg,#0d0705,#120b05 50%,#0d0705);position:relative}
+#products::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(197,121,56,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(197,121,56,.02) 1px,transparent 1px);background-size:90px 90px;pointer-events:none}
+.sec-ey{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,9vw,60px);font-weight:700;text-align:center;background:linear-gradient(135deg,#E7C196,#C57938,#6D3C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.sec-sub{font-family:Georgia,serif;font-style:italic;font-size:13px;color:rgba(231,193,150,.4);text-align:center;margin-bottom:32px}
+.filters{display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.flt{padding:8px 20px;border-radius:50px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(197,121,56,.2);background:transparent;color:rgba(231,193,150,.5);cursor:pointer;transition:all .3s}
+.flt.on{background:linear-gradient(135deg,#6D3C1C,#C57938);color:#E7C196;border-color:transparent;box-shadow:0 0 16px rgba(197,121,56,.3)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:1080px;margin:0 auto}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{border-radius:18px;overflow:hidden;background:linear-gradient(145deg,rgba(56,36,23,.5),rgba(13,7,5,.8));border:1px solid rgba(197,121,56,.12);cursor:pointer;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:active{transform:translateY(-5px);border-color:rgba(197,121,56,.4);box-shadow:0 16px 44px rgba(197,121,56,.16)}
+.card-badge{position:absolute;top:10px;left:10px;z-index:2;padding:3px 9px;border-radius:50px;font-size:8px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,#6D3C1C,#C57938);color:#E7C196}
+.card-img{height:145px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative}
+.card-img svg{position:relative;z-index:1;transition:transform .35s}
+.card:active .card-img svg{transform:translateY(-5px) scale(1.06)}
+.card-body{padding:12px 14px;border-top:1px solid rgba(197,121,56,.1)}
+.card-cat{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(197,121,56,.6);margin-bottom:4px}
+.card-name{font-family:Georgia,serif;font-size:11px;font-weight:600;color:#E7C196;margin-bottom:10px;line-height:1.4}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;background:linear-gradient(135deg,#E7C196,#C57938);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card-btn{width:26px;height:26px;border-radius:50%;border:1px solid rgba(197,121,56,.3);background:rgba(197,121,56,.1);color:#E7C196;font-size:12px;display:flex;align-items:center;justify-content:center}
+
+/* EXPERIENCE */
+#experience{padding:80px 20px;background:linear-gradient(180deg,#0d0705,#1a0e08);position:relative;overflow:hidden}
+#experience::before{content:'';position:absolute;width:500px;height:500px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(109,60,28,.14) 0%,transparent 65%);filter:blur(70px);pointer-events:none}
+.exp-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:700px){.exp-grid{grid-template-columns:1fr 1fr;gap:60px;align-items:center}}
+.exp-tag{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.exp-tag-line{height:1px;width:36px;background:#C57938}
+.exp-tag-txt{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#C57938}
+.exp-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:700;line-height:1.1;color:#E7C196;margin-bottom:16px}
+.exp-h2 em{background:linear-gradient(135deg,#C57938,#6D3C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:italic}
+.exp-p{font-family:Georgia,serif;font-style:italic;font-size:13px;line-height:1.9;color:rgba(231,193,150,.5);margin-bottom:24px}
+.exp-nums{display:flex;gap:24px}
+.exp-nv{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;background:linear-gradient(135deg,#E7C196,#C57938);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.exp-nl{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(197,121,56,.5);margin-top:4px;text-align:center}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feat{padding:18px;border-radius:16px;background:linear-gradient(145deg,rgba(56,36,23,.4),rgba(13,7,5,.6));border:1px solid rgba(197,121,56,.12)}
+.feat-ico{font-size:20px;color:#C57938;margin-bottom:8px}
+.feat-t{font-size:11px;font-weight:600;color:#E7C196;margin-bottom:5px}
+.feat-d{font-size:10px;line-height:1.6;color:rgba(231,193,150,.45)}
+
+/* GALLERY */
+#gallery{padding:80px 20px;background:#0d0705}
+.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1000px;margin:32px auto 0}
+@media(min-width:700px){.gal-grid{grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto}}
+.gal-item{border-radius:18px;background:linear-gradient(145deg,rgba(56,36,23,.45),rgba(13,7,5,.75));border:1px solid rgba(197,121,56,.1);padding:24px 18px;min-height:130px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.gal-item.big{grid-column:1/3;min-height:160px}
+@media(min-width:700px){.gal-item.big{grid-column:1/2;grid-row:1/3;min-height:250px}}
+.gal-ico{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(197,121,56,.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(197,121,56,.5)}
+.gal-line{height:1px;width:24px;background:linear-gradient(90deg,#C57938,transparent);margin-bottom:7px}
+.gal-h{font-family:Georgia,serif;font-size:14px;font-weight:600;color:#E7C196;margin-bottom:4px}
+.gal-s{font-size:10px;color:rgba(231,193,150,.45)}
+
+/* CTA */
+#cta{padding:100px 20px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1a0e08,#2a1608 30%,#1a0e08 60%,#0d0705);text-align:center}
+#cta::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(197,121,56,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(197,121,56,.035) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
+#cta::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(109,60,28,.18) 0%,transparent 60%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.cta-icon{width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,#6D3C1C,#C57938);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 22px;box-shadow:0 0 28px rgba(197,121,56,.4);color:#E7C196}
+.cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,9vw,60px);font-weight:700;background:linear-gradient(135deg,#E7C196,#C57938,#6D3C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px;line-height:1.1}
+.cta-p{font-family:Georgia,serif;font-style:italic;font-size:13px;line-height:1.9;color:rgba(231,193,150,.5);margin-bottom:32px;max-width:380px;margin-left:auto;margin-right:auto}
+
+/* FOOTER */
+footer{padding:52px 20px 32px;background:#060402;border-top:1px solid rgba(197,121,56,.1)}
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto 36px}
+@media(min-width:600px){.foot-grid{grid-template-columns:1.5fr 1fr 1fr 1fr}}
+.foot-brand-txt{font-size:11px;line-height:1.8;color:rgba(231,193,150,.35);font-style:italic;margin-top:12px}
+.foot-socials{display:flex;gap:8px;margin-top:16px}
+.fsoc{width:30px;height:30px;border-radius:50%;border:1px solid rgba(197,121,56,.2);color:rgba(231,193,150,.4);font-size:9px;font-weight:700;text-transform:uppercase;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.foot-col-title{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#C57938;font-weight:600;margin-bottom:12px}
+.foot-col a{display:block;font-size:11px;color:rgba(231,193,150,.35);text-decoration:none;margin-bottom:7px}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding-top:22px;border-top:1px solid rgba(197,121,56,.08);max-width:1000px;margin:0 auto}
+.foot-copy{font-size:10px;color:rgba(231,193,150,.2)}
+.foot-made{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(197,121,56,.3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.shown{opacity:1;transform:none}
+
+
+/* PREMIUM UPGRADE */
+.wa-float{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:9999;
+padding:14px 22px;
+border-radius:999px;
+background:linear-gradient(135deg,#6D3C1C,#C57938,#E7C196);
+color:#1a0e08;
+font-size:11px;
+font-weight:700;
+letter-spacing:.12em;
+text-transform:uppercase;
+text-decoration:none;
+box-shadow:0 0 30px rgba(197,121,56,.45);
+backdrop-filter:blur(20px);
+transition:all .35s ease;
+}
+.wa-float:hover{
+transform:translateY(-4px) scale(1.03);
+box-shadow:0 0 40px rgba(197,121,56,.6);
+}
+
+.product-modal{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;
+}
+.product-modal.show{display:flex;}
+.modal-backdrop{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(16px);
+}
+.modal-box{
+position:relative;
+width:min(920px,92%);
+border-radius:28px;
+overflow:hidden;
+background:linear-gradient(145deg,#140b06,#261509);
+border:1px solid rgba(197,121,56,.2);
+display:grid;
+grid-template-columns:1fr 1fr;
+box-shadow:0 0 80px rgba(0,0,0,.5);
+}
+@media(max-width:780px){.modal-box{grid-template-columns:1fr}}
+.modal-left{
+padding:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:radial-gradient(circle at center,rgba(197,121,56,.15),transparent 60%);
+}
+.modal-right{padding:40px;}
+.modal-tag{
+font-size:10px;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:#C57938;
+margin-bottom:14px;
+}
+.modal-right h2{
+font-family:'Cormorant Garamond',serif;
+font-size:48px;
+line-height:1;
+margin-bottom:18px;
+background:linear-gradient(135deg,#E7C196,#C57938);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.modal-desc{
+font-size:13px;
+line-height:1.9;
+color:rgba(231,193,150,.55);
+margin-bottom:30px;
+}
+.opt-title{
+font-size:10px;
+letter-spacing:.2em;
+text-transform:uppercase;
+color:#C57938;
+margin-bottom:10px;
+}
+.opt-row{display:flex;gap:10px;margin-bottom:24px;}
+.color-dot{
+width:28px;height:28px;border-radius:50%;
+border:2px solid rgba(255,255,255,.1);
+}
+.gold{background:#C57938}.black{background:#111}.silver{background:#999}
+.storage-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;}
+.storage-row button{
+padding:12px 18px;border-radius:999px;
+background:rgba(197,121,56,.08);
+color:#E7C196;border:1px solid rgba(197,121,56,.2);
+cursor:pointer;
+}
+.modal-price{
+font-family:'Cormorant Garamond',serif;
+font-size:54px;font-weight:700;margin-bottom:28px;
+background:linear-gradient(135deg,#E7C196,#C57938);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.modal-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.close-modal{
+position:absolute;right:18px;top:18px;width:42px;height:42px;
+border-radius:50%;border:none;background:rgba(255,255,255,.06);
+color:#E7C196;cursor:pointer;font-size:16px;
+}
+
+#vetro-exp{
+padding:120px 20px;
+position:relative;
+overflow:hidden;
+background:#090403;
+}
+.vx-bg{
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at top,rgba(197,121,56,.14),transparent 45%),
+radial-gradient(circle at bottom,rgba(109,60,28,.12),transparent 50%);
+filter:blur(10px);
+}
+.vx-content{
+position:relative;
+z-index:2;
+max-width:1100px;
+margin:0 auto;
+text-align:center;
+}
+.vx-mini{
+font-size:10px;
+letter-spacing:.35em;
+text-transform:uppercase;
+color:#C57938;
+margin-bottom:20px;
+}
+.vx-content h2{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(48px,8vw,90px);
+line-height:.95;
+margin-bottom:24px;
+background:linear-gradient(135deg,#E7C196,#C57938,#6D3C1C);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.vx-content h2 span{font-style:italic;}
+.vx-content p{
+max-width:700px;
+margin:0 auto 60px;
+font-size:15px;
+line-height:1.9;
+color:rgba(231,193,150,.55);
+}
+.vx-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+.vx-card{
+padding:28px;
+border-radius:24px;
+background:linear-gradient(145deg,rgba(56,36,23,.4),rgba(13,7,5,.75));
+border:1px solid rgba(197,121,56,.12);
+backdrop-filter:blur(20px);
+}
+.vx-icon{font-size:26px;color:#C57938;margin-bottom:16px;}
+.vx-title{font-size:15px;font-weight:700;color:#E7C196;margin-bottom:8px;}
+.vx-desc{font-size:12px;line-height:1.7;color:rgba(231,193,150,.45);}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.04;
+z-index:999999;
+background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+mix-blend-mode:soft-light;
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.02);
+border-color:rgba(197,121,56,.4);
+box-shadow:0 25px 60px rgba(197,121,56,.14);
+}
+
+.cursor{
+position:fixed;
+width:24px;
+height:24px;
+border:1px solid rgba(197,121,56,.5);
+border-radius:50%;
+pointer-events:none;
+transform:translate(-50%,-50%);
+backdrop-filter:blur(4px);
+z-index:9999999;
+transition:transform .12s ease;
+}
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">
+    <svg width="16" height="26" viewBox="0 0 18 30"><defs><linearGradient id="lg0" x1="0" y1="0" x2="18" y2="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E7C196"/><stop offset="50%" stop-color="#C57938"/><stop offset="100%" stop-color="#6D3C1C"/></linearGradient></defs><rect x="1" y="1" width="16" height="28" rx="3.5" stroke="url(#lg0)" stroke-width="1.4" fill="none"/><rect x="3" y="4" width="12" height="18" rx="1.5" fill="url(#lg0)" fill-opacity=".12"/><circle cx="9" cy="26" r="1.2" fill="url(#lg0)" fill-opacity=".8"/><rect x="6" y="2.5" width="6" height="1" rx=".5" fill="url(#lg0)" fill-opacity=".5"/></svg>
+    <span class="logo-text">VETRO</span>
+  </div>
+  <nav class="nav-links">
+    <a href="#products">iPhone</a>
+    <a href="#products">MacBook</a>
+    <a href="#experience">Nosotros</a>
+  </nav>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Comprar</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="eyebrow">
+      <div class="eline"></div>
+      <span class="etxt">Exclusividad · Tecnología · Lujo</span>
+      <div class="eline r"></div>
+    </div>
+    <h1><span class="h1a">Tecnología</span><span class="h1b">de Lujo.</span></h1>
+    <div class="phone-wrap">
+      <div class="phone-float">
+        <div class="phone-aura"></div>
+        <svg width="88" height="180" viewBox="0 0 88 180" fill="none">
+          <defs>
+            <linearGradient id="hpb" x1="0" y1="0" x2="88" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3a2010"/><stop offset="100%" stop-color="#0d0705"/></linearGradient>
+            <linearGradient id="hpf" x1="0" y1="0" x2="88" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#C57938" stop-opacity=".5"/><stop offset="50%" stop-color="#C57938"/><stop offset="100%" stop-color="#C57938" stop-opacity=".5"/></linearGradient>
+            <linearGradient id="hps" x1="0" y1="0" x2="70" y2="150" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#C57938" stop-opacity=".15"/><stop offset="100%" stop-color="#000" stop-opacity=".6"/></linearGradient>
+          </defs>
+          <rect x="2" y="2" width="84" height="176" rx="18" fill="url(#hpb)"/>
+          <rect x="2" y="2" width="84" height="176" rx="18" stroke="url(#hpf)" stroke-width="1.5" fill="none"/>
+          <rect x="7" y="10" width="74" height="158" rx="12" fill="url(#hps)"/>
+          <rect x="28" y="16" width="32" height="10" rx="5" fill="#050302"/>
+          <circle cx="52" cy="21" r="3" fill="#0a0604" stroke="#C57938" stroke-width=".5" stroke-opacity=".5"/>
+          <rect x="14" y="40" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".1"/>
+          <rect x="33" y="40" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".08"/>
+          <rect x="52" y="40" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".06"/>
+          <rect x="14" y="60" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".07"/>
+          <rect x="33" y="60" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".1"/>
+          <rect x="52" y="60" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".08"/>
+          <rect x="14" y="80" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".09"/>
+          <rect x="33" y="80" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".06"/>
+          <rect x="52" y="80" width="14" height="14" rx="3.5" fill="#C57938" fill-opacity=".1"/>
+          <rect x="12" y="142" width="64" height="20" rx="10" fill="#C57938" fill-opacity=".06" stroke="#C57938" stroke-opacity=".12" stroke-width=".6"/>
+          <rect x="30" y="160" width="28" height="2.5" rx="1.2" fill="#C57938" fill-opacity=".45"/>
+          <rect x="56" y="10" width="20" height="20" rx="6" fill="#1a0e08" stroke="#C57938" stroke-opacity=".3" stroke-width=".8"/>
+          <circle cx="66" cy="20" r="5" fill="#1a0e08" stroke="#C57938" stroke-opacity=".5" stroke-width=".7"/>
+          <circle cx="66" cy="20" r="2.5" fill="#050302"/>
+          <circle cx="67" cy="19" r=".7" fill="white" fill-opacity=".2"/>
+          <rect x="-1" y="38" width="2.5" height="18" rx="1.2" fill="#C57938" fill-opacity=".6"/>
+          <rect x="-1" y="62" width="2.5" height="12" rx="1.2" fill="#C57938" fill-opacity=".6"/>
+          <rect x="86.5" y="46" width="2.5" height="26" rx="1.2" fill="#C57938" fill-opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+    <p class="hero-sub">Dispositivos Apple originales. Experiencia sin igual. Para quienes exigen lo mejor de la tecnología y el diseño.</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Explorar Colección</button>
+      <button class="btn-o" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Ver iPhone 17 Pro →</button>
+    </div>
+    <div class="stats">
+      <div><div class="sn">500+</div><div class="sl">Clientes Elite</div></div>
+      <div><div class="sn">100%</div><div class="sl">Originales Apple</div></div>
+      <div><div class="sn">24h</div><div class="sl">Entrega Express</div></div>
+    </div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-bar"></div></div>
+</section>
+
+<section id="products">
+  <div class="reveal">
+    <div class="sec-ey">
+      <div class="eline"></div>
+      <span class="etxt">Colección Exclusiva</span>
+      <div class="eline r"></div>
+    </div>
+    <div class="sec-title">Nuestros Productos</div>
+    <div class="sec-sub">Cada dispositivo, una obra de ingeniería.</div>
+  </div>
+  <div class="filters reveal">
+    <button class="flt on" onclick="filterP(this,'Todos')">Todos</button>
+    <button class="flt" onclick="filterP(this,'iPhone')">iPhone</button>
+    <button class="flt" onclick="filterP(this,'MacBook')">MacBook</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="experience">
+  <div class="exp-grid">
+    <div class="reveal">
+      <div class="exp-tag"><div class="exp-tag-line"></div><span class="exp-tag-txt">La Experiencia VETRO</span></div>
+      <div class="exp-h2">Más que un dispositivo.<br><em>Una declaración.</em></div>
+      <p class="exp-p">En VETRO no vendemos tecnología. Ofrecemos la cúspide de la innovación Apple, curada y presentada con el cuidado que merece quien exige lo mejor. Cada producto es seleccionado, verificado y empacado con obsesión por los detalles.</p>
+      <div class="exp-nums">
+        <div><div class="exp-nv">Apple</div><div class="exp-nl">Partner Oficial</div></div>
+        <div><div class="exp-nv">5★</div><div class="exp-nl">Servicio Premium</div></div>
+        <div><div class="exp-nv">36x</div><div class="exp-nl">Sin Interés</div></div>
+      </div>
+    </div>
+    <div class="feat-grid reveal">
+      <div class="feat"><div class="feat-ico">◈</div><div class="feat-t">Garantía Extendida</div><div class="feat-d">12 meses de cobertura premium con reemplazo express.</div></div>
+      <div class="feat"><div class="feat-ico">◇</div><div class="feat-t">Envío Prioritario</div><div class="feat-d">Entrega en 24h con packaging de lujo y seguimiento.</div></div>
+      <div class="feat"><div class="feat-ico">◆</div><div class="feat-t">100% Originales</div><div class="feat-d">Todos los dispositivos Apple con caja sellada.</div></div>
+      <div class="feat"><div class="feat-ico">◉</div><div class="feat-t">Financiación Elite</div><div class="feat-d">Hasta 36 cuotas sin interés con tarjetas seleccionadas.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="reveal"><div class="sec-title" style="font-size:clamp(28px,8vw,52px)">Diseñado para impresionar.</div></div>
+  <div class="gal-grid reveal">
+    <div class="gal-item big" style="background:linear-gradient(145deg,rgba(109,60,28,.4),rgba(13,7,5,.8))">
+      <div class="gal-ico">◆</div><div class="gal-line"></div>
+      <div class="gal-h">Diseño Atemporal</div><div class="gal-s">Titanio. Elegancia. Precisión.</div>
+    </div>
+    <div class="gal-item"><div class="gal-ico">◇</div><div class="gal-line"></div><div class="gal-h">Chip A18 Pro</div><div class="gal-s">El cerebro más poderoso de Apple.</div></div>
+    <div class="gal-item"><div class="gal-ico">◈</div><div class="gal-line"></div><div class="gal-h">Cámara Pro</div><div class="gal-s">48MP. Visión sin límites.</div></div>
+    <div class="gal-item" style="grid-column:1/3"><div class="gal-ico">◉</div><div class="gal-line"></div><div class="gal-h">iOS 18</div><div class="gal-s">El sistema más refinado del mundo.</div></div>
+  </div>
+</section>
+
+
+<section id="vetro-exp">
+  <div class="vx-bg"></div>
+  <div class="vx-content reveal">
+    <div class="vx-mini">The VETRO Experience</div>
+    <h2>
+      Tecnología diseñada<br>
+      para quienes exigen<br>
+      <span>más que un dispositivo.</span>
+    </h2>
+    <p>
+      Cada producto VETRO es presentado con packaging premium,
+      garantía exclusiva y atención personalizada.
+    </p>
+    <div class="vx-cards">
+      <div class="vx-card">
+        <div class="vx-icon">◆</div>
+        <div class="vx-title">Packaging Premium</div>
+        <div class="vx-desc">Presentación de lujo en cada entrega.</div>
+      </div>
+      <div class="vx-card">
+        <div class="vx-icon">◈</div>
+        <div class="vx-title">Entrega Express</div>
+        <div class="vx-desc">Envíos prioritarios y seguimiento VIP.</div>
+      </div>
+      <div class="vx-card">
+        <div class="vx-icon">◇</div>
+        <div class="vx-title">Atención Elite</div>
+        <div class="vx-desc">Asistencia personalizada vía WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-inner reveal">
+    <div class="cta-icon">◆</div>
+    <div class="cta-h">Tu próximo iPhone te espera.</div>
+    <p class="cta-p">Descubrí por qué VETRO es la referencia en tecnología Apple premium en Argentina. Financiación, garantía y servicio de elite.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+      <button class="btn-g">Contactar Ahora</button>
+      <button class="btn-o" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Ver Catálogo</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="logo"><svg width="14" height="24" viewBox="0 0 18 30"><defs><linearGradient id="lg2" x1="0" y1="0" x2="18" y2="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E7C196"/><stop offset="50%" stop-color="#C57938"/><stop offset="100%" stop-color="#6D3C1C"/></linearGradient></defs><rect x="1" y="1" width="16" height="28" rx="3.5" stroke="url(#lg2)" stroke-width="1.4" fill="none"/><rect x="3" y="4" width="12" height="18" rx="1.5" fill="url(#lg2)" fill-opacity=".12"/><circle cx="9" cy="26" r="1.2" fill="url(#lg2)" fill-opacity=".8"/></svg><span class="logo-text" style="font-size:17px">VETRO</span></div>
+      <p class="foot-brand-txt">Tecnología Apple de lujo. Productos originales, servicio premium.</p>
+      <div class="foot-socials"><a href="#" class="fsoc">IG</a><a href="#" class="fsoc">TW</a><a href="#" class="fsoc">WA</a></div>
+    </div>
+    <div class="foot-col"><div class="foot-col-title">Productos</div><a href="#">iPhone 17 Pro</a><a href="#">iPhone 16 Pro Max</a><a href="#">MacBook Air M4</a><a href="#">MacBook Pro M4</a></div>
+    <div class="foot-col"><div class="foot-col-title">VETRO</div><a href="#">Nosotros</a><a href="#">Garantía</a><a href="#">Envíos</a><a href="#">Contacto</a></div>
+    <div class="foot-col"><div class="foot-col-title">Legal</div><a href="#">Privacidad</a><a href="#">Términos</a><a href="#">Cookies</a></div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2026 VETRO. Todos los derechos reservados.</span>
+    <span class="foot-made">Hecho con obsesión por el detalle.</span>
+  </div>
+</footer>
+
+
+<a class="wa-float" href="https://wa.me/5490000000000?text=Hola%20quiero%20consultar%20por%20un%20iPhone%20en%20VETRO" target="_blank">
+  <span>Asesor VETRO</span>
+</a>
+
+<div class="cursor"></div>
+
+<div class="product-modal" id="productModal">
+  <div class="modal-backdrop" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <button class="close-modal" onclick="closeModal()">✕</button>
+    <div class="modal-left">
+      <div class="modal-phone" id="modalVisual"></div>
+    </div>
+    <div class="modal-right">
+      <div class="modal-tag">VETRO EXCLUSIVE</div>
+      <h2 id="modalTitle"></h2>
+      <p class="modal-desc">
+        Tecnología Apple premium con garantía oficial, packaging de lujo y entrega prioritaria.
+      </p>
+      <div class="modal-options">
+        <div>
+          <div class="opt-title">Color</div>
+          <div class="opt-row">
+            <div class="color-dot gold"></div>
+            <div class="color-dot black"></div>
+            <div class="color-dot silver"></div>
+          </div>
+        </div>
+        <div>
+          <div class="opt-title">Capacidad</div>
+          <div class="storage-row">
+            <button>256GB</button>
+            <button>512GB</button>
+            <button>1TB</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-actions">
+        <a href="#" class="btn-g">Comprar Ahora</a>
+        <a href="https://wa.me/5490000000000" target="_blank" class="btn-o">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const products=[
+  {id:1,name:"Apple iPhone 17 Pro",price:"$1550",cat:"iPhone",badge:"NUEVO",fc:"#C57938",bc:"#2e1e0f",st:"#C57938",wide:false},
+  {id:2,name:"Apple iPhone 16 Pro Max",price:"$900",cat:"iPhone",badge:"PRO MAX",fc:"#A07848",bc:"#1e1410",st:"#A07848",wide:true},
+  {id:3,name:"Apple iPhone 16",price:"$699",cat:"iPhone",badge:null,fc:"#4A7AA0",bc:"#0e1420",st:"#4A7AA0",wide:false},
+  {id:4,name:"Apple iPhone 16 Pro",price:"$799",cat:"iPhone",badge:"PRO",fc:"#C57938",bc:"#1c1508",st:"#8C6A3A",wide:false},
+  {id:5,name:"Apple iPhone 15 Pro Max",price:"$750",cat:"iPhone",badge:null,fc:"#8CA88C",bc:"#111811",st:"#7A8A7A",wide:true},
+  {id:6,name:"Apple iPhone 15",price:"$650",cat:"iPhone",badge:null,fc:"#C5789A",bc:"#1a0e14",st:"#C5789A",wide:false},
+  {id:7,name:"Apple MacBook Air 13 M4",price:"$2.700",cat:"MacBook",badge:"M4",fc:"#C57938",bc:"#1a1208",st:"#C57938",wide:false},
+  {id:8,name:"MacBook Pro 14 Línea M4",price:"$3.500",cat:"MacBook",badge:"M4 PRO",fc:"#888",bc:"#141414",st:"#888",wide:false},
+  {id:9,name:"MacBook Pro 14 M4 512GB",price:"$5.000",cat:"MacBook",badge:"ELITE",fc:"#E7C196",bc:"#0d0705",st:"#E7C196",wide:false}
+];
+
+function iphoneSVG(p){
+  const w=p.wide?68:58,h=p.wide?140:124,id='i'+p.id;
+  const cw=(w-20)/4;
+  let icons='';
+  for(let r=0;r<3;r++) for(let c=0;c<4;c++)
+    icons+=`<rect x="${10+c*cw}" y="${34+r*19}" width="10" height="10" rx="2.8" fill="${p.st}" fill-opacity="${0.05+(c+r)*0.01}"/>`;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none"><defs>
+    <linearGradient id="b${id}" x1="0" y1="0" x2="${w}" y2="${h}" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.bc}"/><stop offset="100%" stop-color="#050302"/></linearGradient>
+    <linearGradient id="f${id}" x1="0" y1="0" x2="${w}" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.fc}" stop-opacity=".45"/><stop offset="50%" stop-color="${p.fc}" stop-opacity=".9"/><stop offset="100%" stop-color="${p.fc}" stop-opacity=".45"/></linearGradient>
+    <linearGradient id="s${id}" x1="0" y1="0" x2="${w*.8}" y2="${h*.8}" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.st}" stop-opacity=".12"/><stop offset="100%" stop-color="#000" stop-opacity=".55"/></linearGradient>
+  </defs>
+  <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="12" fill="url(#b${id})"/>
+  <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="12" stroke="url(#f${id})" stroke-width="1.3" fill="none"/>
+  <rect x="5" y="7" width="${w-10}" height="${h-15}" rx="9" fill="url(#s${id})"/>
+  <rect x="${w/2-12}" y="11" width="24" height="8" rx="4" fill="#050302"/>
+  <circle cx="${w/2+7}" cy="15" r="1.8" fill="#0a0604" stroke="${p.fc}" stroke-width=".4" stroke-opacity=".5"/>
+  ${icons}
+  <rect x="9" y="${h-32}" width="${w-18}" height="16" rx="8" fill="${p.st}" fill-opacity=".06" stroke="${p.st}" stroke-opacity=".12" stroke-width=".5"/>
+  <rect x="${w/2-11}" y="${h-19}" width="22" height="2" rx="1" fill="${p.st}" fill-opacity=".4"/>
+  <rect x="-1" y="26" width="2" height="14" rx="1" fill="${p.fc}" fill-opacity=".55"/>
+  <rect x="-1" y="44" width="2" height="9" rx="1" fill="${p.fc}" fill-opacity=".55"/>
+  <rect x="${w-1}" y="30" width="2" height="18" rx="1" fill="${p.fc}" fill-opacity=".55"/>
+  <rect x="${w-19}" y="7" width="13" height="13" rx="4" fill="${p.bc}" stroke="${p.fc}" stroke-opacity=".3" stroke-width=".7"/>
+  <circle cx="${w-12.5}" cy="13.5" r="3.2" fill="${p.bc}" stroke="${p.fc}" stroke-opacity=".5" stroke-width=".6"/>
+  <circle cx="${w-12.5}" cy="13.5" r="1.6" fill="#050302"/>
+  <circle cx="${w-11.8}" cy="12.8" r=".5" fill="white" fill-opacity=".2"/>
+  </svg>`;
+}
+
+function macbookSVG(p){
+  const id='m'+p.id;
+  let keys='';
+  for(let r=0;r<3;r++) for(let c=0;c<10;c++)
+    keys+=`<rect x="${7+c*13}" y="${91+r*3}" width="11" height="2" rx=".7" fill="${p.fc}" fill-opacity=".05"/>`;
+  let lines='';
+  for(let i=0;i<7;i++)
+    lines+=`<rect x="19" y="${16+i*9}" width="${16+(i%3)*26+(i%2)*13}" height="2.4" rx="1.1" fill="${p.st}" fill-opacity="${0.06+(i%3)*0.04}"/>`;
+  return `<svg width="150" height="105" viewBox="0 0 150 105" fill="none"><defs>
+    <linearGradient id="mb${id}" x1="0" y1="0" x2="150" y2="105" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.bc}"/><stop offset="100%" stop-color="#050302"/></linearGradient>
+    <linearGradient id="mf${id}" x1="0" y1="0" x2="150" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.fc}" stop-opacity=".4"/><stop offset="50%" stop-color="${p.fc}" stop-opacity=".9"/><stop offset="100%" stop-color="${p.fc}" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="ms${id}" x1="0" y1="0" x2="115" y2="78" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="${p.st}" stop-opacity=".1"/><stop offset="100%" stop-color="#000" stop-opacity=".65"/></linearGradient>
+  </defs>
+  <rect x="7" y="2" width="136" height="83" rx="5.5" fill="url(#mb${id})"/>
+  <rect x="7" y="2" width="136" height="83" rx="5.5" stroke="url(#mf${id})" stroke-width=".9" fill="none"/>
+  <rect x="13" y="7" width="124" height="73" rx="3.5" fill="url(#ms${id})"/>
+  ${lines}
+  <ellipse cx="75" cy="43" rx="30" ry="18" fill="${p.st}" fill-opacity=".03"/>
+  <rect x="69" y="7" width="12" height="5" rx="2.5" fill="#050302"/>
+  <circle cx="75" cy="9.5" r="1.4" fill="#0a0807" stroke="${p.fc}" stroke-width=".4" stroke-opacity=".4"/>
+  <rect x="7" y="83" width="136" height="3" fill="${p.fc}" fill-opacity=".18"/>
+  <rect x="3" y="86" width="144" height="14" rx="3" fill="url(#mb${id})"/>
+  <rect x="3" y="86" width="144" height="14" rx="3" stroke="url(#mf${id})" stroke-width=".6" fill="none"/>
+  <rect x="52" y="90" width="46" height="7" rx="3" fill="${p.fc}" fill-opacity=".06" stroke="${p.fc}" stroke-opacity=".16" stroke-width=".5"/>
+  ${keys}
+  <rect x="11" y="98" width="9" height="2" rx="1" fill="${p.fc}" fill-opacity=".13"/>
+  <rect x="130" y="98" width="9" height="2" rx="1" fill="${p.fc}" fill-opacity=".13"/>
+  </svg>`;
+}
+
+function renderProducts(filter){
+  const grid=document.getElementById('grid');
+  const list=filter==='Todos'?products:products.filter(p=>p.cat===filter);
+  grid.innerHTML=list.map(p=>`
+    <div class="card" onclick="openModal(${p.id})">
+      ${p.badge?`<div class="card-badge">${p.badge}</div>`:''}
+      <div class="card-img" style="background:radial-gradient(circle at 50% 85%,${p.fc}28 0%,transparent 60%)">
+        ${p.cat==='MacBook'?macbookSVG(p):iphoneSVG(p)}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-foot">
+          <span class="card-price">${p.price}</span>
+          <div class="card-btn">→</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterP(btn,filter){
+  document.querySelectorAll('.flt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderProducts(filter);
+}
+
+// Navbar scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// Particles
+(function(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<22;i++){
+    const d=document.createElement('div');
+    d.className='p';
+    const sz=Math.random()*1.5+.5,dur=Math.random()*8+6,del=Math.random()*8;
+    d.style.cssText=`left:${Math.random()*100}%;bottom:${Math.random()*80}%;width:${sz}px;height:${sz}px;animation-duration:${dur}s;animation-delay:-${del}s`;
+    c.appendChild(d);
+  }
+})();
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');obs.unobserve(e.target)}});
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+
+
+function openModal(id){
+  const p=products.find(x=>x.id===id);
+  document.getElementById('modalTitle').innerText=p.name;
+  document.getElementById('modalPrice').innerText=p.price;
+  document.getElementById('modalVisual').innerHTML =
+    p.cat==='MacBook'?macbookSVG(p):iphoneSVG(p);
+  document.getElementById('productModal').classList.add('show');
+}
+
+function closeModal(){
+  document.getElementById('productModal').classList.remove('show');
+}
+
+const cursor=document.querySelector('.cursor');
+window.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+});
+
+
+// Init
+renderProducts('Todos');
+</script>
+</body>
+</html>
